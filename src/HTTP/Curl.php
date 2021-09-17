@@ -1,9 +1,9 @@
 <?php
 
-namespace Gyugie\HTTP;
+namespace Gyugie\OVO\HTTP;
 
-use Gyugie\HTTPClient;
-use Gyugie\ParseResponse;
+use Gyugie\OVO\HTTPClient;
+use Gyugie\OVO\ParseResponse;
 
 class Curl implements HTTPClient
 {

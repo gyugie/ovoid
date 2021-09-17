@@ -1,12 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Gyugie\OVOID;
-use Gyugie\Response\Login2FAResponse;
-use Gyugie\Response\Login2FAVerifyResponse;
-use Gyugie\Response\LoginSecurityCodeResponse;
-use Gyugie\Response\WalletTransactionResponse;
-use Gyugie\Response\Model\Balance;
+use Gyugie\OVO\OVOID;
+use Gyugie\OVO\Response\Login2FAResponse;
+use Gyugie\OVO\Response\Login2FAVerifyResponse;
+use Gyugie\OVO\Response\LoginSecurityCodeResponse;
+use Gyugie\OVO\Response\WalletTransactionResponse;
+use Gyugie\OVO\Response\Model\Balance;
 
 final class OVOIDTest extends TestCase
 {

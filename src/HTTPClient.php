@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyugie;
+namespace Gyugie\OVO;
 
 interface HTTPClient
 {

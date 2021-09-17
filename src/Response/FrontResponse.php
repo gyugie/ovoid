@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyugie\Response;
+namespace Gyugie\OVO\Response;
 
 class FrontResponse
 {

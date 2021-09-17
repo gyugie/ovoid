@@ -1,5 +1,5 @@
 <?php
-namespace Gyugie\Response;
+namespace Gyugie\OVO\Response;
 
 class TransferDirectResponse
 {

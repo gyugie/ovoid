@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyugie\Meta;
+namespace Gyugie\OVO\Meta;
 
 /**
  * Action Mark

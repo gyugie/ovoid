@@ -1,6 +1,6 @@
 <?php
 
-namespace Gyugie\Response\Model;
+namespace Gyugie\OVO\Response\Model;
 
 class Balance
 {

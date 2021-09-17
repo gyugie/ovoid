@@ -1,10 +1,10 @@
 <?php
 
-namespace Gyugie;
+namespace Gyugie\OVO;
 
-use Gyugie\HTTP\Curl;
-use Gyugie\Meta\Meta;
-use Gyugie\Meta\ActionMark;
+use Gyugie\OVO\HTTP\Curl;
+use Gyugie\OVO\Meta\Meta;
+use Gyugie\OVO\Meta\ActionMark;
 
 /**
  * OVOID
