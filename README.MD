@@ -1,4 +1,4 @@
-# [Gojek] OVOID Api PHP Class (Un-Official)
+# [OVO] OVOID Api PHP Class (Un-Official)
 Repository Berikut Ini Merupakan Porting Dari namdevel (https://github.com/namdevel/ovoid-API) Untuk PHP 
 
 [![CodeFactor](https://www.codefactor.io/repository/github/mugypleci/ovoid/badge)](https://www.codefactor.io/repository/github/mugypleci/ovoid)
@@ -39,7 +39,7 @@ $ovo = new OVOID();
 
 ##### Genereate Device ID
 ```php
-$loginToken = $ovo->generateUUIDV4();
+$device_id = $ovo->generateUUIDV4();
 ```
 
 ```php
