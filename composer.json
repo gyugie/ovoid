@@ -1,13 +1,14 @@
 {
     "name": "gyugie/ovoid",
+    "description": "Un-Official OVO ID API Wrapper",
     "autoload": {
         "psr-4": {
-            "Gyugie\\": "src/"
+            "Gyugie\\": "src"
         }
     },
     "authors": [
         {
-            "name": "gyugie",
+            "name": "Mugiono Arif Saputra",
             "email": "mugypleci@gmail.com"
         }
     ],
