@@ -14,16 +14,16 @@ class Balance
      *
      * @param object $data
      */
-    public function __construct($data)
+    public function __construct($response)
     {
         $ovoCash = [
-            'cardBalance' => (float)$data->{'001'}->card_balance,
-            'card_no'     => $data->{'001'}->card_no
+            'cardBalance' => (float)$response->data->{'001'}->card_balance,
+            'card_no'     => $response->data->{'001'}->card_no
         ];
 
         $ovo = [
-            'cardBalance' => (int)$data->{'600'}->card_balance,
-            'card_no'     => $data->{'600'}->card_no
+            'cardBalance' => (int)$response->data->{'600'}->card_balance,
+            'card_no'     => $response->data->{'600'}->card_no
         ];
 
         $this->paymentMethod['OVO Cash'] = $ovoCash;

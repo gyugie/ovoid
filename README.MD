@@ -18,6 +18,7 @@ Compliant with the Sep 17, 2020 OVO API update.
 - [x] loginSecurityCode
 - [x] getWalletTransaction
 - [x] isOVO
+- [x] walletInquiry
 
 ### Dokumentasi
 
@@ -47,20 +48,25 @@ $ovo = new OVOID('<device_id>');
 ```
 ##### Login Dengan Nomor Handphone
 ```php
-$loginToken = $ovo->login2FA('<mobilePhone>');
+$loginToken = $ovo->login2FA('<mobilePhone>')->getOtpRefId();
 ```
 ##### Login Pada OVOID Untuk Mendapatkan OTP REF ID
 ```php
-$authToken = $ovo->login2FAVerify('<otp_ref_id>', '<OTP>', '<phone number>');
+$authToken = $ovo->login2FAVerify('<otp_ref_id>', '<OTP>', '<phone number>')->getOtpToken();
 ```
 ##### Mendapatkan Acess Token Informasi Akun Pengguna
 ```php
-$result = $ovo->loginSecurityCode('<secutrity_code>', '<phone number>', '<otp_token>');
+$result = $ovo->loginSecurityCode('<secutrity_code>', '<phone number>', '<otp_token>')->getAuthorizationToken();
 ```
-##### Transfer Ke Sesama ovo
+##### history transaksi
 ```php
-$ovo = new OVOID('<access_token>');
-$result = $ovo->getWalletTransaction('<page>', '<limit>');
+$ovo = new OVOID('<device_id>', '<access_token>');
+$result = $ovo->getWalletTransaction('<page>', '<limit>')->getData();
+```
+##### mendapatkan saldo akhir 
+```php
+$ovo = new OVOID('<device_id>', '<access_token>');
+$result = $ovo->walletInquiry()->getCardBalance('OVO';
 ```
 
 Contributing

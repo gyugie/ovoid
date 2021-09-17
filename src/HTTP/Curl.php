@@ -74,6 +74,7 @@ class Curl implements HTTPClient
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($this->ch);
+        print_r($result);exit;
 
         curl_close($this->ch);
 

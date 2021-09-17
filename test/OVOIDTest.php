@@ -6,6 +6,7 @@ use Gyugie\Response\Login2FAResponse;
 use Gyugie\Response\Login2FAVerifyResponse;
 use Gyugie\Response\LoginSecurityCodeResponse;
 use Gyugie\Response\WalletTransactionResponse;
+use Gyugie\Response\Model\Balance;
 
 final class OVOIDTest extends TestCase
 {
@@ -13,9 +14,9 @@ final class OVOIDTest extends TestCase
 	{
 		$ovo = new OVOID();
 
-		$phone_number = $ovo->formatPhone('6289111111111');
+		$phone_number = $ovo->formatPhone('6289XXXXXXXX');
 
-        $this->assertTrue($phone_number === '089111111111');
+        $this->assertTrue($phone_number === '089XXXXXXXX');
 	}
 
     public function testSetDeviceId()
@@ -86,34 +87,46 @@ JSON;
         );
     }
 
+    public function testGetBalance()
+    {
+        $data = <<<JSON
+        {"status":200,"data":{"001":{"card_balance":1000,"card_no":"800XXXXX","payment_method":"OVO Cash"},"600":{"card_balance":1000,"card_no":"800XXXXX","payment_method":"OVO"}},"message":""}
+        JSON;
+
+        $balance = (new Balance(json_decode($data)))->getCardBalance('OVO');
+        
+        $this->assertTrue(1000 === $balance);
+
+    }
+
     public function testSimulationAuthentication()
     {
         $device_id = (new OVOID())->generateUUIDV4();
 
         $credentials = [
             'device_id' => '0F871081-5246-4841-8CCF-BDBB96C13CA5', 
-            'phone_number' => '089XXXXXXXX',
-            'otp_ref_id' => 'b33947ee-9b86-43b2-b515-c211343fefb3',
-            'otp_code' => '1234',
-            'otp_token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.NE5MekFicTBpd3FhV2o4Y1U3VnB6eVVRQ2VBMlVweHRSNkNIakxpMm0vYnQ4Q3h3NEhSeFpzTE40dGsrU1kwVDJhb3NwT3pYdDE0TWtvTCtPeXozamdMeDRhNTNxTlhvM1JGTllKdkVYejN3VXVyYUFjVEpLeXFjYjN',
-            'security_code' => '111111',
-            'auth_token' => 'eyJhbGciOiJSUzI1NiJ9.eyJleHBpcnlJbk1pbGxpU2Vjb25kcyI6NjA0ODAwMDAwLCJjcmVhdGVUaW1lIjoxNjMxODYwMDU3ODk4LCJzZWNyZXQiOiJod3Y3ZHFtdWMrekQ1MjBaRGVBemZvOWZpcHcwT1ZVVWhNU21vU1d1UzRsa1A4cVE3Nk1nRVY0TVJMcWdHVEN0WnVTUmxsWXhuaXNpaGJrWlBLL0pDVSt4Q2ROZjJBaFRVRWdzdDFqQUxOMnhFZ1IvN2VGUEZUSFFZUjd2N3g4U0txQU1BRmNuZ0hpZkc4VU0vQ3hwOEIxbFRvVXNrWlZQSzdBK0dtQURjR3p0NFE4SXVpNGpvQkI3U1dKUTNZTkh6NzZJdG1PSDc4dEJIYXhKZmhMRFNBUnMyamc0OEtJbXNlVFJURXRJcTRZOFpsdzJuSXpQWnVUNklpSWhRQ0x5ZktGQmZNN3NlUzd0N25NUVlaM0ZwUE5JVDFoa044bFZBVnc5YXQ5RkJmUGk1azhibXl6bDdseU5PMHN0elpYN0JacEk5NEpYT3BNU24zTnJXUDhYNEk2Z2VSbHFFamZjdmN1dCsvdUtPdlE9In0.FPFrAT_Qvb3fkPFkcFdJV1aF_4wil2a9ZpE3GRbrON2OeE3bFRe6n0R_DDKjZZeMubKPuDzBvysjSHCpyUywX_gygm0f8durrkKZJXjw-JuA6oTKYwT-9kN3YsS5UvuztQQKz9PI66NoaNOIGa-5iWnT4QEgdPf6svqMXZ3eI8NmVVpR41g6vcsVMw43o5BohHY2yX1yb4g6U1s56dHXKXZHszEbDcO6Ij14c9c-Ni6lrxTVs3_S-2TTiwv8mWkMwNpUzAcVr2BpGuztjhNks2gwa1BdUmiCJk4AauDF1efmSlBLKb4hVGmn-5rmmJBhTejGCf5Zfk9av3yGGxPWyA'
+            'phone_number' => '08XXXXXXXXX',
+            'otp_ref_id' => '54359b48-3aec-4984-846a-XXXXX',
+            'otp_code' => '0879',
+            'otp_token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.XXX',
+            'security_code' => '987456',
+            'auth_token' => 'eyJhbGciOiJSUzI1NiJ9.XXX'
         ];
 
-        $ovoid = new OVOID($credentials['device_id'], $credentials['auth_token']);
+        // $ovoid = new OVOID($credentials['device_id'], $credentials['auth_token']);
 
-        // $login2FA = $ovoid->login2FA($credentials['phone_number']);
+        // $login2FA = $ovoid->login2FA($credentials['phone_number'])->getOtpRefId();
         // print_r($login2FA);exit;
 
-        // $login2FAVerify = $ovoid->login2FAVerify($credentials['otp_ref_id'], $credentials['otp_code'], $credentials['phone_number']);
+        // $login2FAVerify = $ovoid->login2FAVerify($credentials['otp_ref_id'], $credentials['otp_code'], $credentials['phone_number'])->getOtpToken();
         // print_r($login2FAVerify);exit;
 
-        // $loginSecurityCode = $ovoid->loginSecurityCode($credentials['security_code'], $credentials['phone_number'], $credentials['otp_token']);
+        // $loginSecurityCode = $ovoid->loginSecurityCode($credentials['security_code'], $credentials['phone_number'], $credentials['otp_token'])->getAuthorizationToken();
         // print_r($loginSecurityCode);exit;
 
-        // $hsitory_transaction = $ovoid->getWalletTransaction(1, 1000);
+        // $hsitory_transaction = $ovoid->getWalletTransaction(1, 1000)->getData();
         // print_r($hsitory_transaction);exit;
-
         
+        $this->assertTrue(true);
     }
 } 

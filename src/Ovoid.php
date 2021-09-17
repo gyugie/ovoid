@@ -107,7 +107,7 @@ class OVOID
             "device_id" => $this->device_id
         ];
 
-        return $ch->post(OVOID::HEUSC_API . "/v3/user/accounts/otp", $payload, $this->headers)->getResponse()->getOtpRefId();
+        return $ch->post(OVOID::HEUSC_API . "/v3/user/accounts/otp", $payload, $this->headers)->getResponse();
     }
 
     /**
@@ -129,7 +129,7 @@ class OVOID
             "reff_id" => $refId
         ];
 
-        return $ch->post(OVOID::HEUSC_API . '/v3/user/accounts/otp/validation', $payload, $this->headers)->getResponse()->getOtpToken();
+        return $ch->post(OVOID::HEUSC_API . '/v3/user/accounts/otp/validation', $payload, $this->headers)->getResponse();
     }
 
     /**
@@ -150,7 +150,7 @@ class OVOID
             "otp_token" => $otp_token
         ];
 
-        return $ch->post(OVOID::HEUSC_API . '/v3/user/accounts/login', $payload, $this->headers)->getResponse()->getAuthorizationToken();
+        return $ch->post(OVOID::HEUSC_API . '/v3/user/accounts/login', $payload, $this->headers)->getResponse();
     }
 
     /**
@@ -168,8 +168,21 @@ class OVOID
             OVOID::AGW_API . "/payment/orders/v1/list?limit={$limit}&page={$page}",
             null,
             $this->_aditionalHeader()
-        )->getResponse()->getData();
+        )->getResponse();
     }
+
+    public function walletInquiry()
+    {
+        $ch = new Curl;
+
+        return $ch->get(
+            OVOID::API_URL . "/wallet/inquiry",
+            null,
+            $this->_aditionalHeader()
+        )->getResponse();
+    }
+
+
 
     /**
      * check apakah OVO

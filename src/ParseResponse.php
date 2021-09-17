@@ -12,8 +12,9 @@ class ParseResponse
     public $storeClass = [
         OVOID::HEUSC_API . '/v3/user/accounts/otp'              => 'Gyugie\Response\Login2FAResponse',
         OVOID::HEUSC_API . '/v3/user/accounts/otp/validation'   => 'Gyugie\Response\Login2FAVerifyResponse',
-        OVOID::HEUSC_API . '/v3/user/accounts/login'             => 'Gyugie\Response\LoginSecurityCodeResponse',
-        OVOID::API_URL . 'v1.1/api/auth/customer/isOVO'         => 'Gyugie\Response\isOVOResponse'
+        OVOID::HEUSC_API . '/v3/user/accounts/login'            => 'Gyugie\Response\LoginSecurityCodeResponse',
+        OVOID::API_URL . 'v1.1/api/auth/customer/isOVO'         => 'Gyugie\Response\isOVOResponse',
+        OVOID::API_URL . '/wallet/inquiry'                      => 'Gyugie\Response\Model\Balance'
     ];
 
     private $response;
@@ -27,8 +28,9 @@ class ParseResponse
     public function __construct($chResult, $url)
     {
         $jsonDecodeResult = json_decode($chResult);
+
         //-- Cek apakah ada error dari OVO Response
-        if (isset($jsonDecodeResult->message)) {
+        if (isset($jsonDecodeResult->message) && $jsonDecodeResult->message != '') {
             throw new \Gyugie\Exception\OvoidException($jsonDecodeResult->message . ' ' . $url);
         }
 
