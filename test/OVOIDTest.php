@@ -13,7 +13,7 @@ final class OVOIDTest extends TestCase
 	{
 		$ovo = new OVOID();
 
-		$phone_number = $gopay->formatPhone('6289111111111');
+		$phone_number = $ovo->formatPhone('6289111111111');
 
         $this->assertTrue($phone_number === '089111111111');
 	}
