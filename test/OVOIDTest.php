@@ -11,7 +11,7 @@ final class OVOIDTest extends TestCase
 {
 	public function testPhoneNumber()
 	{
-		$gopay = new OVOID();
+		$ovo = new OVOID();
 
 		$phone_number = $gopay->formatPhone('6289111111111');
 
