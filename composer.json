@@ -1,0 +1,17 @@
+{
+    "name": "gyugie/ovoid",
+    "autoload": {
+        "psr-4": {
+            "Gyugie\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gyugie",
+            "email": "mugypleci@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
