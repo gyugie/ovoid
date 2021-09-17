@@ -10,11 +10,11 @@ class ParseResponse
      * @var array
      */
     public $storeClass = [
-        OVOID::HEUSC_API . '/v3/user/accounts/otp'              => 'Gyugie\Response\Login2FAResponse',
-        OVOID::HEUSC_API . '/v3/user/accounts/otp/validation'   => 'Gyugie\Response\Login2FAVerifyResponse',
-        OVOID::HEUSC_API . '/v3/user/accounts/login'            => 'Gyugie\Response\LoginSecurityCodeResponse',
-        OVOID::API_URL . 'v1.1/api/auth/customer/isOVO'         => 'Gyugie\Response\isOVOResponse',
-        OVOID::API_URL . '/wallet/inquiry'                      => 'Gyugie\Response\Model\Balance'
+        OVOID::HEUSC_API . '/v3/user/accounts/otp'              => 'Gyugie\OVO\Response\Login2FAResponse',
+        OVOID::HEUSC_API . '/v3/user/accounts/otp/validation'   => 'Gyugie\OVO\Response\Login2FAVerifyResponse',
+        OVOID::HEUSC_API . '/v3/user/accounts/login'            => 'Gyugie\OVO\Response\LoginSecurityCodeResponse',
+        OVOID::API_URL . 'v1.1/api/auth/customer/isOVO'         => 'Gyugie\OVO\Response\isOVOResponse',
+        OVOID::API_URL . '/wallet/inquiry'                      => 'Gyugie\OVO\Response\Model\Balance'
     ];
 
     private $response;
@@ -31,15 +31,15 @@ class ParseResponse
 
         //-- Cek apakah ada error dari OVO Response
         if (isset($jsonDecodeResult->message) && $jsonDecodeResult->message != '') {
-            throw new \Gyugie\Exception\OvoidException($jsonDecodeResult->message . ' ' . $url);
+            throw new \Gyugie\OVO\Exception\OvoidException($jsonDecodeResult->message . ' ' . $url);
         }
 
         $parts = parse_url($url);
 
         if ($parts['path'] == '/payment/orders/v1/list') {
-            $this->response = new \Gyugie\Response\WalletTransactionResponse($jsonDecodeResult);
+            $this->response = new \Gyugie\OVO\Response\WalletTransactionResponse($jsonDecodeResult);
         } elseif (strpos($parts['path'], '/gpdm/ovo/ID/v1/billpay/get-denominations/') !== false) {
-            $this->response = new \Gyugie\Response\DenominationsReponse($jsonDecodeResult);
+            $this->response = new \Gyugie\OVO\Response\DenominationsReponse($jsonDecodeResult);
         } else {
             $this->response = new $this->storeClass[$url]($jsonDecodeResult);
         }
